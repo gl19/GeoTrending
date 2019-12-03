@@ -9,17 +9,24 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import twitter4j.Location;
+import twitter4j.ResponseList;
+import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.GeoTrending.MESSAGE";
+    private ResponseList<Location> yeeter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Twitter twitter = TwitterFactory.getSingleton();
     }
 
-    public void searchLocation(View view) throws TwitterException {
+    public void searchLocation(View view) {
         Intent intent = new Intent(this, TopTenTrending.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
