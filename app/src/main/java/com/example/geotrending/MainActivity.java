@@ -19,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TopTenTrending.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        if (!message.equals("")) {
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
+        }
     }
 }
