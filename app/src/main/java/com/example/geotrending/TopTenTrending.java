@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import twitter4j.Location;
+import twitter4j.ResponseList;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+
 public class TopTenTrending extends AppCompatActivity {
 
     @Override
