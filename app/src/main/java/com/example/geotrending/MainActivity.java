@@ -9,12 +9,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.GeoTrending.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Twitter twitter = TwitterFactory.getSingleton();
+
     }
 
     public void searchLocation(View view) {
