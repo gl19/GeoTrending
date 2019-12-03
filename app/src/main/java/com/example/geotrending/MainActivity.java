@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TopTenTrending.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
+
+        // Empty search results in no action and toast is shown to user
         if (!message.equals("")) {
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
