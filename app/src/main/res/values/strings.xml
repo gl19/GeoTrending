@@ -2,4 +2,5 @@
     <string name="app_name">GeoTrending</string>
     <string name="edit_location">Enter Location</string>
     <string name="button_search">Search</string>
+    <string name="GeoTrending">GeoTrending</string>
 </resources>
