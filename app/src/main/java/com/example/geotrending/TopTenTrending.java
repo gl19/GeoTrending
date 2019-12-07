@@ -2,9 +2,27 @@ package com.example.geotrending;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
+
+import twitter4j.AsyncTwitter;
+import twitter4j.AsyncTwitterFactory;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterAdapter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.TwitterListener;
+import twitter4j.TwitterMethod;
+import twitter4j.conf.ConfigurationBuilder;
+
+import static twitter4j.TwitterMethod.UPDATE_STATUS;
 
 public class TopTenTrending extends AppCompatActivity {
 
