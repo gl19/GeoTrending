@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,8 +33,8 @@ public class TopTenTrending extends AppCompatActivity {
         Integer woeid = intent.getIntExtra(MainActivity.EXTRA_WOEID, 0);
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.locationTitle);
-        textView.setText(message);
+        String title = ("Trending @" + message);
+        setTitle(title);
 
         TopTenThread thread = new TopTenThread(woeid);
         thread.start();
@@ -46,7 +48,7 @@ public class TopTenTrending extends AppCompatActivity {
     }
 
     public void updateTopTen() {
-        ViewGroup list = findViewById(R.id.TopTrendingLayout);
+        ViewGroup list = findViewById(R.id.list);
         list.removeAllViews();
 
         for(int i = 0; i < 10; i++) {

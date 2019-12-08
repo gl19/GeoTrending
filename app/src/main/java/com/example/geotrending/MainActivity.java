@@ -1,17 +1,19 @@
 package com.example.geotrending;
 
+/*
+    UI elements taken from https://developer.android.com/
+ */
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ListAdapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,11 +21,11 @@ import java.util.List;
 
 import twitter4j.Location;
 import twitter4j.ResponseList;
-import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,26 +60,41 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ExampleThread thread = new ExampleThread();
-        thread.start();
-
         AutoCompleteTextView autoLocation = findViewById(R.id.locationSearch);
         autoLocation.setAdapter(new ArrayAdapter<>
                 (MainActivity.this, android.R.layout.simple_list_item_1, locationsArrayName));
-
-        TextView a = findViewById(R.id.textView4);
-        a.setText(locationsArrayWoeid[5].toString());
     }
 
-    public void searchLocation(View view) throws TwitterException {
+    // Action bar menu from https://www.youtube.com/watch?v=STl3JmL6VFg
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_scrolling_locations, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.availableLocations) {
+            Intent intent = new Intent(this, LocationList.class);
+            intent.putStringArrayListExtra("locations", (ArrayList<String>) locationsString);
+            startActivity(intent);
+        }
+        if (id == R.id.about) {
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void searchLocation(View view) {
         Intent intent = new Intent(this, TopTenTrending.class);
         AutoCompleteTextView locationSearch = findViewById(R.id.locationSearch);
         String message = locationSearch.getText().toString();
 
         if (!(message.equals("") || message == null)) {
             int number = 0;
-            for(int i = 0; i < locationsArrayName.length; i++) {
-                if(message.equals(locationsArrayName[i])) {
+            for (int i = 0; i < locationsArrayName.length; i++) {
+                String formatted = locationsArrayName[i].replaceAll("\\s+","");
+                if (message.equalsIgnoreCase(formatted)) {
                     number = i;
                     break;
                 }
@@ -100,15 +117,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LocationList.class);
         intent.putStringArrayListExtra("locations", (ArrayList<String>) locationsString);
         startActivity(intent);
-    }
-
-    public void test(View view) {
-        TextView y = findViewById(R.id.textView3);
-        y.setText(messageTest);
-
-        TextView z = findViewById(R.id.textView4);
-        String a = locations.get(0).getName() + " (woeid:" + locations.get(0).getWoeid() + ")";
-        z.setText(a);
     }
 
     //Initial locations available
@@ -140,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
     class ExampleThread extends Thread {
 
         @Override
@@ -163,4 +172,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    */
 }

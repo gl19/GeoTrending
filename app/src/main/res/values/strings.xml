@@ -102,4 +102,7 @@
     <string name="LocationTitle">Title</string>
     <string name="SelectLocation">Select a Location</string>
     <string name="edit_message">Enter a location</string>
+    <string name="about">About</string>
+    <string name="aboutBody">Body</string>
+    <string name="aboutTitle">Title</string>
 </resources>

@@ -2,7 +2,6 @@ package com.example.geotrending;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
@@ -18,7 +17,9 @@ public class LocationList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
 
-        Intent intent = getIntent();
+        String title = ("Available Locations");
+        setTitle(title);
+
         locations = getIntent().getStringArrayListExtra("locations");
 
         String joined = TextUtils.join("\n", locations);
