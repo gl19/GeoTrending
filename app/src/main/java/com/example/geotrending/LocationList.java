@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import twitter4j.Location;
-import twitter4j.ResponseList;
 
 public class LocationList extends AppCompatActivity {
 
@@ -22,5 +21,8 @@ public class LocationList extends AppCompatActivity {
         Intent intent = getIntent();
         locations = getIntent().getStringArrayListExtra("locations");
 
+        String joined = TextUtils.join("\n", locations);
+        TextView textView = findViewById(R.id.locations);
+        textView.setText(joined);
     }
 }
