@@ -7,15 +7,17 @@
     tools:context=".TopTenTrending">
 
     <LinearLayout
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/locationTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Trend1" />
+            android:text="@string/LocationTitle"
+            android:textSize="24sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

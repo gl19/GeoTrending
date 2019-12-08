@@ -97,4 +97,7 @@
     <string name="action_settings">Settings</string>
     <string name="Locations">Locations</string>
     <string name="AvailableLocations">Available Locations</string>
+    <string name="trendNumber">Trend Number</string>
+    <string name="trendValue">Trend</string>
+    <string name="LocationTitle">Title</string>
 </resources>
