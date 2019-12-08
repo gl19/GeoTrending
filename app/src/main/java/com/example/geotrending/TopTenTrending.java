@@ -45,24 +45,26 @@ public class TopTenTrending extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        TextView number1 = findViewById(R.id.number1);
-        number1.setText(trendArray[0].getName());
+        updateTopTen();
+    }
 
-
-        /*
-        ViewGroup list = findViewById(R.id.list);
+    public void updateTopTen() {
+        ViewGroup list = findViewById(R.id.TopTrendingLayout);
         list.removeAllViews();
 
-        for(int i = 1; i < 11; i++) {
+        for(int i = 0; i < 10; i++) {
             View topTenChunk = getLayoutInflater().inflate(R.layout.chunk_top_ten, list, false);
             TextView number = topTenChunk.findViewById(R.id.trendNumber);
-            number.setText(i);
+            int num = i;
+            number.setText("Trending #" + num);
+
+            TextView hype = topTenChunk.findViewById(R.id.trendHype);
+            hype.setText(trendArray[i].getTweetVolume());
 
             TextView value = topTenChunk.findViewById(R.id.trendValue);
-            value.setText(trendArray[i + 1].toString());
+            value.setText(trendArray[i].getName());
+            list.addView(topTenChunk);
         }
-
-         */
     }
 
     class TopTenThread extends Thread {

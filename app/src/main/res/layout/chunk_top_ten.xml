@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/trendNumber"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/trendNumber" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/trendValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/trendValue"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/trendValue"
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
+            android:text="@string/trendValue"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trendNumber" />
+
+        <TextView
+            android:id="@+id/trendHype"
+            android:layout_width="151dp"
+            android:layout_height="24dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/trendValue"
+            app:layout_constraintTop_toBottomOf="@+id/trendNumber" />
+
+        <TextView
+            android:id="@+id/trendNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trendNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintTop_toBottomOf="@+id/trendValue"
+            tools:layout_editor_absoluteX="-5dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
