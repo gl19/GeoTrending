@@ -1,12 +1,19 @@
 package com.example.geotrending;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import twitter4j.Trend;
 import twitter4j.Trends;
@@ -19,6 +26,10 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TopTenTrending extends AppCompatActivity {
 
     private Trend[] trendArray;
+    
+    private Button browse;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +54,9 @@ public class TopTenTrending extends AppCompatActivity {
         }
 
         updateTopTen();
+
     }
+
 
     public void updateTopTen() {
         ViewGroup list = findViewById(R.id.list);
@@ -52,7 +65,7 @@ public class TopTenTrending extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             View topTenChunk = getLayoutInflater().inflate(R.layout.chunk_top_ten, list, false);
             TextView number = topTenChunk.findViewById(R.id.trendNumber);
-            int num = i + 1;
+            final int num = i + 1;
             number.setText("Trending #" + num);
 
             TextView hype = topTenChunk.findViewById(R.id.trendHype);
@@ -66,9 +79,20 @@ public class TopTenTrending extends AppCompatActivity {
 
             TextView value = topTenChunk.findViewById(R.id.trendValue);
             value.setText(trendArray[i].getName());
+            Button browse = topTenChunk.findViewById(R.id.browsebut);
+
+            browse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/search?q=" + trendArray[num - 1].getName() ));
+                    startActivity(browserIntent);
+                }
+            });
+
             list.addView(topTenChunk);
         }
     }
+
 
     class TopTenThread extends Thread {
 
