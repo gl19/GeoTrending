@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
-import twitter4j.Status;
 import twitter4j.Trend;
 import twitter4j.Trends;
 import twitter4j.Twitter;
@@ -55,11 +52,17 @@ public class TopTenTrending extends AppCompatActivity {
         for(int i = 0; i < 10; i++) {
             View topTenChunk = getLayoutInflater().inflate(R.layout.chunk_top_ten, list, false);
             TextView number = topTenChunk.findViewById(R.id.trendNumber);
-            int num = i;
+            int num = i + 1;
             number.setText("Trending #" + num);
 
             TextView hype = topTenChunk.findViewById(R.id.trendHype);
-            hype.setText(trendArray[i].getTweetVolume());
+            int volume = trendArray[i].getTweetVolume();
+            if (volume == -1) {
+                hype.setText("Volume: Not Available");
+            } else {
+                hype.setText("Volume: " + volume);
+            }
+
 
             TextView value = topTenChunk.findViewById(R.id.trendValue);
             value.setText(trendArray[i].getName());
