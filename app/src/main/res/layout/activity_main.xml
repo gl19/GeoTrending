@@ -6,18 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/locationSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="40dp"
-        android:ems="10"
-        android:hint="@string/edit_location"
-        android:inputType="textPersonName"
+        android:hint="@string/edit_message"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
 
@@ -25,16 +22,12 @@
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:onClick="searchLocation"
         android:text="@string/button_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/locationSearch"
         app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
 
     <TextView

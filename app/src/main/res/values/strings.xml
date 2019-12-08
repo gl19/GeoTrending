@@ -100,4 +100,6 @@
     <string name="trendNumber">Trend Number</string>
     <string name="trendValue">Trend</string>
     <string name="LocationTitle">Title</string>
+    <string name="SelectLocation">Select a Location</string>
+    <string name="edit_message">Enter a location</string>
 </resources>

@@ -9,8 +9,11 @@
     <LinearLayout
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/locationTitle"
@@ -18,6 +21,16 @@
             android:layout_height="wrap_content"
             android:text="@string/LocationTitle"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/number1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
