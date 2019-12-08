@@ -13,7 +13,8 @@
         <TextView
             android:id="@+id/trendValue"
             android:layout_width="252dp"
-            android:layout_height="23dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text="@string/trendValue"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +23,13 @@
         <TextView
             android:id="@+id/trendHype"
             android:layout_width="151dp"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
+            android:layout_marginBottom="4dp"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/trendValue"
-            app:layout_constraintTop_toBottomOf="@+id/trendNumber" />
+            app:layout_constraintBottom_toBottomOf="@+id/divider2"
+            app:layout_constraintStart_toEndOf="@+id/trendValue" />
 
         <TextView
             android:id="@+id/trendNumber"
@@ -41,6 +43,7 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="2dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintTop_toBottomOf="@+id/trendValue"
             tools:layout_editor_absoluteX="-5dp" />

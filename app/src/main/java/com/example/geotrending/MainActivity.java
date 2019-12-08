@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         if (!(message.equals("") || message == null)) {
             int number = 0;
             for (int i = 0; i < locationsArrayName.length; i++) {
-                String formatted = locationsArrayName[i].replaceAll("\\s+","");
+                String formatted = locationsArrayName[i].replaceAll("\\s+", "");
                 if (message.equalsIgnoreCase(formatted)) {
                     number = i;
                     break;

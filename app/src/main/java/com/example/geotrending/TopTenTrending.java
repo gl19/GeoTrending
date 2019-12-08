@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -51,7 +49,7 @@ public class TopTenTrending extends AppCompatActivity {
         ViewGroup list = findViewById(R.id.list);
         list.removeAllViews();
 
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             View topTenChunk = getLayoutInflater().inflate(R.layout.chunk_top_ten, list, false);
             TextView number = topTenChunk.findViewById(R.id.trendNumber);
             int num = i + 1;
