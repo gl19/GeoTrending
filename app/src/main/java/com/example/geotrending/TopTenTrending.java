@@ -26,10 +26,6 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TopTenTrending extends AppCompatActivity {
 
     private Trend[] trendArray;
-    
-    private Button browse;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,17 +100,9 @@ public class TopTenTrending extends AppCompatActivity {
 
         @Override
         public void run() {
-            ConfigurationBuilder cb = new ConfigurationBuilder();
-            cb.setDebugEnabled(true)
-                    .setOAuthConsumerKey("9alVPGLKVIp0sEtoa1b3tZEnn")
-                    .setOAuthConsumerSecret("0y8YVdeU09laY402BPJJNqXeWxOmdosJoZn5BPDZgH1Yft2SWP")
-                    .setOAuthAccessToken("1199152818038308864-egUurjskATwRwHzf5CcppBuAtQGjPQ")
-                    .setOAuthAccessTokenSecret("JiTLQX3RcVEsZ4JBYeorKYJfZQNta5B0vRvq5EGoShUcA");
-
-            TwitterFactory tf = new TwitterFactory(cb.build());
-            Twitter twitter = tf.getInstance();
+            OAuth oAuth = new OAuth();
             try {
-                Trends trends = twitter.getPlaceTrends(woeid);
+                Trends trends = oAuth.getTwitter().getPlaceTrends(woeid);
                 trendArray = trends.getTrends();
             } catch (TwitterException e) {
                 e.printStackTrace();

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.GeoTrending.MESSAGE";
 
     public static final String EXTRA_WOEID = "com.example.GeoTrending.WOEID";
-
-    private String messageTest;
 
     private ResponseList<Location> locations;
 
@@ -68,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Action bar menu from https://www.youtube.com/watch?v=STl3JmL6VFg
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_scrolling_locations, menu);
+        getMenuInflater().inflate(R.menu.menu_action_bar, menu);
         return true;
     }
 
@@ -95,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
             int number = 0;
             for (int i = 0; i < locationsArrayName.length; i++) {
                 String formatted = locationsArrayName[i].replaceAll("\\s+", "");
-                if (message.equalsIgnoreCase(formatted)) {
+                String messageFormatted = message.replaceAll("\\s+", "");
+                if (messageFormatted.toLowerCase().contains(formatted.toLowerCase())) {
                     number = i;
                     break;
                 }
@@ -114,27 +112,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void availableLocations(View view) {
-        Intent intent = new Intent(this, LocationList.class);
-        intent.putStringArrayListExtra("locations", (ArrayList<String>) locationsString);
-        startActivity(intent);
-    }
-
     //Initial locations available
     class LocationThread extends Thread {
         @Override
         public void run() {
-            ConfigurationBuilder cb = new ConfigurationBuilder();
-            cb.setDebugEnabled(true)
-                    .setOAuthConsumerKey("9alVPGLKVIp0sEtoa1b3tZEnn")
-                    .setOAuthConsumerSecret("0y8YVdeU09laY402BPJJNqXeWxOmdosJoZn5BPDZgH1Yft2SWP")
-                    .setOAuthAccessToken("1199152818038308864-egUurjskATwRwHzf5CcppBuAtQGjPQ")
-                    .setOAuthAccessTokenSecret("JiTLQX3RcVEsZ4JBYeorKYJfZQNta5B0vRvq5EGoShUcA");
-
-            TwitterFactory tf = new TwitterFactory(cb.build());
-            Twitter twitter = tf.getInstance();
+            OAuth oAuth = new OAuth();
             try {
-                locations = twitter.getAvailableTrends();
+                locations = oAuth.getTwitter().getAvailableTrends();
 
                 for (Location location : locations) {
                     locationsString.add((location.getName() + " (woeid:" + location.getWoeid() + ")"));
@@ -148,31 +132,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-    /*
-    class ExampleThread extends Thread {
-
-        @Override
-        public void run() {
-            ConfigurationBuilder cb = new ConfigurationBuilder();
-            cb.setDebugEnabled(true)
-                    .setOAuthConsumerKey("9alVPGLKVIp0sEtoa1b3tZEnn")
-                    .setOAuthConsumerSecret("0y8YVdeU09laY402BPJJNqXeWxOmdosJoZn5BPDZgH1Yft2SWP")
-                    .setOAuthAccessToken("1199152818038308864-egUurjskATwRwHzf5CcppBuAtQGjPQ")
-                    .setOAuthAccessTokenSecret("JiTLQX3RcVEsZ4JBYeorKYJfZQNta5B0vRvq5EGoShUcA");
-
-            TwitterFactory tf = new TwitterFactory(cb.build());
-            Twitter twitter = tf.getInstance();
-            try {
-                List<Status> statuses = twitter.getHomeTimeline();
-                for (Status status : statuses) {
-                    messageTest =  status.getUser().getName() + ":" + status.getText();
-                }
-            } catch (TwitterException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    */
 }
