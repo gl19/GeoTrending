@@ -20,6 +20,6 @@ public class About extends AppCompatActivity {
         title1.setText("GeoTrending 2019");
 
         TextView body = findViewById(R.id.aboutBody);
-        body.setText("Project created by Guangxin Liu and Parth Silva for CS125 @ UIUC.");
+        body.setText("Project created by Guangxin Liu and Parth Savla for CS125 @ UIUC.");
     }
 }
