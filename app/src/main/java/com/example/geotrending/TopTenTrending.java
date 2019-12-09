@@ -78,7 +78,8 @@ public class TopTenTrending extends AppCompatActivity {
                 @Override
                 public void onClick(final View v) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://twitter.com/search?q=" + trendArray[num - 1].getName()));
+                            Uri.parse("https://twitter.com/search?q=" +
+                                    trendArray[num - 1].getName().replaceAll("#", "")));
                     startActivity(browserIntent);
                 }
             });
