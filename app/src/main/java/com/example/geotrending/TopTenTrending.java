@@ -50,9 +50,7 @@ public class TopTenTrending extends AppCompatActivity {
         }
 
         updateTopTen();
-
     }
-
 
     public void updateTopTen() {
         ViewGroup list = findViewById(R.id.list);
@@ -67,11 +65,10 @@ public class TopTenTrending extends AppCompatActivity {
             TextView hype = topTenChunk.findViewById(R.id.trendHype);
             int volume = trendArray[i].getTweetVolume();
             if (volume == -1) {
-                hype.setText("Volume: Not Available");
+                hype.setText("Volume: Not/A");
             } else {
                 hype.setText("Volume: " + volume);
             }
-
 
             TextView value = topTenChunk.findViewById(R.id.trendValue);
             value.setText(trendArray[i].getName());
@@ -80,7 +77,8 @@ public class TopTenTrending extends AppCompatActivity {
             browse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/search?q=" + trendArray[num - 1].getName() ));
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://twitter.com/search?q=" + trendArray[num - 1].getName()));
                     startActivity(browserIntent);
                 }
             });

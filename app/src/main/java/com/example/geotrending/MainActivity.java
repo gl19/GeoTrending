@@ -26,7 +26,6 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.GeoTrending.MESSAGE";
@@ -119,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
             OAuth oAuth = new OAuth();
             try {
                 locations = oAuth.getTwitter().getAvailableTrends();
-
                 for (Location location : locations) {
                     locationsString.add((location.getName() + " (woeid:" + location.getWoeid() + ")"));
                     locationsName.add(location.getName());

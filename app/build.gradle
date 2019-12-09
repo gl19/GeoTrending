@@ -28,5 +28,4 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'org.twitter4j:twitter4j-core:4.0.7'
-    implementation 'org.twitter4j:twitter4j-async:4.0.7'
 }
