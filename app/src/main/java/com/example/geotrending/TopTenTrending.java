@@ -65,7 +65,7 @@ public class TopTenTrending extends AppCompatActivity {
             TextView hype = topTenChunk.findViewById(R.id.trendHype);
             int volume = trendArray[i].getTweetVolume();
             if (volume == -1) {
-                hype.setText("Volume: Not/A");
+                hype.setText("Volume: <10000");
             } else {
                 hype.setText("Volume: " + volume);
             }
