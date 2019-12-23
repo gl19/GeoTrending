@@ -20,10 +20,14 @@ public class LocationList extends AppCompatActivity {
         String title = ("Available Locations");
         setTitle(title);
 
-        locations = getIntent().getStringArrayListExtra("locations");
+        try {
+            locations = getIntent().getStringArrayListExtra("locations");
 
-        String joined = TextUtils.join("\n", locations);
-        TextView textView = findViewById(R.id.locations);
-        textView.setText(joined);
+            String joined = TextUtils.join("\n", locations);
+            TextView textView = findViewById(R.id.locations);
+            textView.setText(joined);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

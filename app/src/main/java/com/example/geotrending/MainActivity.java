@@ -21,16 +21,15 @@ import java.util.List;
 
 import twitter4j.Location;
 import twitter4j.ResponseList;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.GeoTrending.MESSAGE";
 
     public static final String EXTRA_WOEID = "com.example.GeoTrending.WOEID";
+
+    public boolean network = true;
 
     private ResponseList<Location> locations;
 
@@ -44,22 +43,34 @@ public class MainActivity extends AppCompatActivity {
 
     private Integer[] locationsArrayWoeid;
 
+    private Toast currentToast = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LocationThread locationThread = new LocationThread();
-        locationThread.start();
+        currentToast = Toast.makeText(getApplicationContext(), null, Toast.LENGTH_SHORT);
+
+        start();
+    }
+
+    public void start() {
         try {
+            LocationThread locationThread = new LocationThread();
+            locationThread.start();
             locationThread.join();
+            AutoCompleteTextView autoLocation = findViewById(R.id.locationSearch);
+            autoLocation.setAdapter(new ArrayAdapter<>
+                    (MainActivity.this, android.R.layout.simple_list_item_1, locationsArrayName));
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        } catch (Exception e) {
+            network = false;
 
-        AutoCompleteTextView autoLocation = findViewById(R.id.locationSearch);
-        autoLocation.setAdapter(new ArrayAdapter<>
-                (MainActivity.this, android.R.layout.simple_list_item_1, locationsArrayName));
+            currentToast.setText("Please check your network");
+            currentToast.show();
+        }
     }
 
     // Action bar menu from https://www.youtube.com/watch?v=STl3JmL6VFg
@@ -87,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
         AutoCompleteTextView locationSearch = findViewById(R.id.locationSearch);
         String message = locationSearch.getText().toString();
 
-        if (!(message.equals("") || message == null)) {
+        if (!network) {
+            start();
+        } else if (!(message.equals("") || message == null)) {
             int number = 0;
             for (int i = 0; i < locationsArrayName.length; i++) {
                 String formatted = locationsArrayName[i].replaceAll("\\s+", "");
@@ -100,14 +113,9 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_MESSAGE, locationsArrayName[number]);
             intent.putExtra(EXTRA_WOEID, locationsArrayWoeid[number]);
             startActivity(intent);
-
         } else {
-            Context context = getApplicationContext();
-            CharSequence text = "Location search empty";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            currentToast.setText("Location search empty");
+            currentToast.show();
         }
     }
 
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 locationsArrayName = locationsName.toArray(new String[0]);
                 locationsArrayWoeid = locationsWoeid.toArray(new Integer[0]);
+                network = true;
             } catch (TwitterException e) {
                 e.printStackTrace();
             }
